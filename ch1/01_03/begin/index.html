@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Flash Card App</title>
+  </head>
+  <body>
+    <div id="app">
+      //v-text lets us access the variable deckName without using curly braces
+      <h1 v-text="deckName"></h1>
+      <div>Type something<input type="text" v-model="userInput" /></div>
+      <div class="card">
+        <h2 v-text="userInput == 'flip' ? '' : cards[0].front">Item</h2>
+        <div v-html="userInput == 'flip' ? cards[0].back : ''">Description</div>
+      </div>
+      <a v-bind:href="readMoreUrl">More</a>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="https://unpkg.com/vue@3.2.37/dist/vue.global.js"></script>
+    <script>
+      const FlashCardApp = {
+        data() {
+          return {
+            deckName: 'Vue.js Fundamentals',
+            cards,
+            flipped: false,
+            readMoreUrl: 'https://google.com',
+            userInput: 'default',
+          };
+        },
+      };
+      const app = Vue.createApp(FlashCardApp).mount('#app');
+    </script>
+  </body>
+</html>
